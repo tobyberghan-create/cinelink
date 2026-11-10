@@ -1,5 +1,7 @@
 # CineLink
 
+**Live:** https://cinelink-tau.vercel.app (Vercel, auto-deploys from `main`)
+
 Free, solo, browser-based movie linking game. Two modes — **Actor Chain** and **Film Chain** — built on live TMDB data. Spec: `spec/CineLink-Build-Plan.pdf`.
 
 ## Stack
