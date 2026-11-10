@@ -5,8 +5,8 @@
  * The API key is read from the server environment only (TMDB_API_KEY) and is
  * never included in any response.
  */
-import { config } from '../../src/config';
-import type { CastCredit, CrewCredit, FilmCredits, SearchResult } from '../../src/shared/types';
+import { config } from '../../src/config.js';
+import type { CastCredit, CrewCredit, FilmCredits, SearchResult } from '../../src/shared/types.js';
 
 export const TMDB_BASE = 'https://api.themoviedb.org/3';
 

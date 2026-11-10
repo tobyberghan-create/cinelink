@@ -4,7 +4,7 @@
  * dev plugin. Each returns only the fields the game uses, with Cache-Control
  * headers so the platform edge cache absorbs repeat lookups.
  */
-import { config } from '../../src/config';
+import { config } from '../../src/config.js';
 import {
   ConfigError,
   type Fetcher,
@@ -13,7 +13,7 @@ import {
   getStartPool,
   pickRandom,
   searchMovies,
-} from './tmdb';
+} from './tmdb.js';
 
 export interface HandlerDeps {
   fetcher?: Fetcher;

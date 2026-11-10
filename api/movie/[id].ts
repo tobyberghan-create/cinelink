@@ -1,4 +1,4 @@
-import { handleMovie } from '../_lib/handlers';
+import { handleMovie } from '../_lib/handlers.js';
 
 export function GET(request: Request): Promise<Response> {
   // Vercel passes dynamic segments as query params for Web-signature functions.

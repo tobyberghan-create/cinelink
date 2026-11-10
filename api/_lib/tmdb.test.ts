@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { config } from '../../src/config';
-import { handleMovie, handleSearch, handleStart } from './handlers';
+import { config } from '../../src/config.js';
+import { handleMovie, handleSearch, handleStart } from './handlers.js';
 import {
   buildDiscoverUrl,
   buildMovieUrl,
@@ -10,7 +10,7 @@ import {
   startPoolPages,
   trimMovie,
   trimSearch,
-} from './tmdb';
+} from './tmdb.js';
 
 const TODAY = '2026-11-10';
 
