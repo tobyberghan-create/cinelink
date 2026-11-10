@@ -112,6 +112,6 @@ export const config = {
     maxRetries: 2,
     backoffMs: 500,
   },
-} as const;
+};
 
 export type Config = typeof config;

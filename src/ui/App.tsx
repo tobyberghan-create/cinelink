@@ -1,8 +1,19 @@
+import { About } from './screens/About';
+import { Game } from './screens/Game';
+import { GameOver } from './screens/GameOver';
+import { Home } from './screens/Home';
+import { useGame } from './store';
+
 export function App() {
-  return (
-    <main className="mx-auto flex min-h-full max-w-md flex-col items-center justify-center gap-4 p-6">
-      <h1 className="text-4xl font-bold tracking-tight">CineLink</h1>
-      <p className="text-zinc-400">Phase 0 — proxy online.</p>
-    </main>
-  );
+  const screen = useGame((s) => s.screen);
+  switch (screen) {
+    case 'game':
+      return <Game />;
+    case 'gameover':
+      return <GameOver />;
+    case 'about':
+      return <About />;
+    default:
+      return <Home />;
+  }
 }

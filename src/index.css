@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* On-screen keyboard open on a phone: the layout viewport shrinks (interactive-widget=resizes-content). */
+@custom-variant short (@media (max-height: 560px));
+
 :root {
   color-scheme: dark;
   --gold: #f5c542;
