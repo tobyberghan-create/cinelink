@@ -49,8 +49,16 @@ The handlers in `api/_lib/handlers.ts` are plain `Request → Response` function
 | `GET /api/search?q=` | `{ results: [{ id, title, year, releaseDate, posterPath }] }` — max 6, movies only, `include_adult=false`, released only | 1 h |
 | `GET /api/movie/:id` | `{ id, title, year, releaseDate, posterPath, cast[], crew[] }` — cast sorted by billing `order`; crew filtered to eligible link jobs | 7 d |
 | `GET /api/start?mode=actor\|film` | `{ mode, film }` — random film from the ~1,000 most-voted released films, with credits | none (random) |
+| `POST /api/dispute` | body `{ mode, reason, filmIds[1..2], personId? }` → 204; writes a `DISPUTE {…}` line to the function log (Vercel → Project → Logs) | — |
 
 Errors: `{ error }` with `400` bad input, `404` unknown film, `502` TMDB unavailable, `503` rate limited, `500` server misconfigured. The client pauses the run on 5xx rather than charging a life.
+
+## Phase 3: sharing, analytics, feedback, disputes
+
+- **Share** (game-over): native share sheet on phones, clipboard elsewhere — mode, score, game link (`src/ui/share.ts`).
+- **Analytics:** anonymous events `run_start`, `answer_correct`, `answer_wrong`, `timeout`, `dispute`, `run_end` via Umami (cookieless). Create a website in Umami Cloud (free tier) and set `VITE_UMAMI_SCRIPT_URL` + `VITE_UMAMI_WEBSITE_ID`. Unset = events only logged to the dev console.
+- **Feedback:** set `VITE_FEEDBACK_URL` to the Tally form; the game-over "Give feedback" button is greyed out until then.
+- **Dispute:** on any rejected answer. Sends a `dispute` analytics event (durable, queryable in Umami) and POSTs to `/api/dispute` (function log). The life is still lost in v1.
 
 ## Attribution
 

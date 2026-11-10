@@ -6,10 +6,16 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin } from 'vite';
 import { loadEnv } from 'vite';
 import { handleMovie, handleSearch, handleStart, type HandlerDeps } from '../api/_lib/handlers';
+import { handleDispute } from '../api/_lib/dispute';
 import { mockFetcher } from './mockTmdb';
 
 async function toResponse(req: IncomingMessage, deps: HandlerDeps): Promise<Response | null> {
   const url = new URL(req.url ?? '/', 'http://localhost');
+  if (url.pathname === '/api/dispute') {
+    const chunks: Buffer[] = [];
+    for await (const c of req) chunks.push(c as Buffer);
+    return handleDispute(new Request(url, { method: req.method ?? 'POST', body: Buffer.concat(chunks), headers: { 'content-type': 'application/json' } }));
+  }
   const request = new Request(url, { method: req.method ?? 'GET' });
   if (url.pathname === '/api/search') return handleSearch(request, deps);
   if (url.pathname === '/api/start') return handleStart(request, deps);
